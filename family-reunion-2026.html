@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Reunion 2026 — Mountain Retreat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --forest: #2D5016; --pine: #3E6B1F; --sage: #6B8F47; --moss: #9AB973; --mist: #C8DDAF;
+    --cream: #F5F0E8; --warm: #EDE5D0; --gold: #C4933F; --rust: #A0522D; --sky: #4A7FA5;
+    --text: #1C2B0F; --text2: #4A5E35; --text3: #7A8C6A; --border: rgba(45,80,22,0.15); --border2: rgba(45,80,22,0.25);
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+  .header { background: var(--forest); color: white; padding: 2.5rem 2rem 2rem; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px); }
+  .header-badge { display: inline-block; background: rgba(196,147,63,0.3); border: 1px solid #C4933F; color: #f0c870; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 12px; font-weight: 500; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .header p { color: rgba(255,255,255,0.7); font-size: 0.95rem; }
+  .dates-bar { background: #C4933F; color: white; display: flex; justify-content: center; gap: 2rem; padding: 0.75rem 1rem; font-size: 0.85rem; font-weight: 500; flex-wrap: wrap; }
+  .dates-bar span { display: flex; align-items: center; gap: 6px; }
+  .tabs { display: flex; background: var(--warm); border-bottom: 1px solid var(--border2); overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 10; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab { padding: 0.85rem 1.25rem; font-size: 0.82rem; font-weight: 500; color: var(--text3); cursor: pointer; border: none; background: transparent; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; display: flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; }
+  .tab:hover { color: var(--pine); }
+  .tab.active { color: var(--forest); border-bottom-color: var(--forest); }
+  .content { padding: 1.5rem; max-width: 860px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--forest); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border2); }
+  .card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .card-green { background: #f0f7e8; border-color: var(--mist); }
+  .card-gold { background: #fdf6ec; border-color: rgba(196,147,63,0.3); }
+  .card-sky { background: #eef4f9; border-color: rgba(74,127,165,0.25); }
+  .family-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+  .family-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; margin: 0 auto 8px; }
+  .av-green { background: #d4edba; color: #2D5016; }
+  .av-gold { background: #fde8c0; color: #8a5a10; }
+  .av-sky { background: #d0e8f5; color: #1f5a80; }
+  .av-pink { background: #fde0ec; color: #8a1f4e; }
+  .av-rust { background: #f5ddd0; color: #7a3015; }
+  .av-purple { background: #ece0f5; color: #5a1f8a; }
+  .family-name { font-weight: 600; font-size: 0.9rem; color: var(--text); }
+  .family-sub { font-size: 0.78rem; color: var(--text3); margin-top: 2px; }
+  .baby-badge { background: #fde8c0; color: #8a5a10; font-size: 10px; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-top: 4px; }
+  .diet-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; display: inline-block; margin-top: 4px; }
+  .gf-badge { background: #d4edba; color: #1a4a08; }
+  .df-badge { background: #d0e8f5; color: #0a3a5a; }
+  .itinerary-day { margin-bottom: 1.25rem; }
+  .day-header { background: var(--forest); color: white; padding: 0.6rem 1rem; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between; align-items: center; }
+  .day-header .day-label { font-family: 'Playfair Display', serif; font-size: 1rem; }
+  .day-header .day-date { font-size: 0.8rem; opacity: 0.8; }
+  .day-body { background: white; border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; }
+  .time-block { display: flex; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); gap: 12px; align-items: flex-start; }
+  .time-block:last-child { border-bottom: none; }
+  .time-tag { font-size: 0.75rem; font-weight: 500; color: var(--text3); min-width: 65px; padding-top: 2px; }
+  .time-icon { color: var(--sage); font-size: 18px; min-width: 20px; }
+  .time-content .title { font-weight: 500; font-size: 0.9rem; }
+  .time-content .detail { font-size: 0.8rem; color: var(--text3); margin-top: 2px; line-height: 1.5; }
+  .tag { display: inline-block; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-top: 4px; font-weight: 500; margin-right: 4px; }
+  .tag-green { background: #d4edba; color: #2D5016; }
+  .tag-gold { background: #fde8c0; color: #8a5a10; }
+  .tag-sky { background: #d0e8f5; color: #1f5a80; }
+  .tag-rust { background: #f5ddd0; color: #7a3015; }
+  .tag-kids { background: #fde0ec; color: #8a1f4e; }
+  .tag-gf { background: #d4edba; color: #1a4a08; }
+  .tag-df { background: #d0e8f5; color: #0a3a5a; }
+  .dads-tab-banner { background: #fdf6ec; border: 1.5px solid #C4933F; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 12px; }
+  .dads-tab-icon { font-size: 28px; color: #C4933F; }
+  .dads-tab-text strong { font-size: 1rem; color: #7a4a10; display: block; }
+  .dads-tab-text span { font-size: 0.82rem; color: #a07040; }
+  .cost-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; table-layout: fixed; }
+  .cost-table th { text-align: left; padding: 0.5rem 0.75rem; background: var(--warm); color: var(--text2); font-weight: 500; }
+  .cost-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); word-wrap: break-word; vertical-align: top; }
+  .cost-table tr:last-child td { border-bottom: none; font-weight: 600; color: var(--forest); }
+  .assign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media(max-width:560px) { .assign-grid { grid-template-columns: 1fr; } }
+  .assign-day { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .assign-head { background: var(--pine); color: white; padding: 0.5rem 0.75rem; font-size: 0.82rem; font-weight: 500; }
+  .assign-row { display: flex; justify-content: space-between; padding: 0.45rem 0.75rem; border-bottom: 1px solid var(--border); font-size: 0.8rem; gap: 8px; }
+  .assign-row:last-child { border-bottom: none; }
+  .assign-who { font-weight: 500; color: var(--forest); flex-shrink: 0; }
+  .assign-task { color: var(--text3); text-align: right; }
+  .meal-day { margin-bottom: 1rem; }
+  .meal-head { font-weight: 600; font-size: 0.85rem; color: var(--forest); background: var(--warm); padding: 0.5rem 0.75rem; border-radius: 8px 8px 0 0; border: 1px solid var(--border); }
+  .meal-row { display: grid; grid-template-columns: 85px 1fr 1fr; gap: 8px; padding: 0.5rem 0.75rem; border: 1px solid var(--border); border-top: none; font-size: 0.8rem; align-items: start; }
+  .meal-row:last-child { border-radius: 0 0 8px 8px; }
+  .meal-type { font-weight: 500; color: var(--text2); }
+  .meal-name { color: var(--text); line-height: 1.5; }
+  .meal-cook { color: var(--text3); font-style: italic; }
+  .diet-note { font-size: 0.72rem; margin-top: 3px; padding: 1px 6px; border-radius: 8px; display: inline-block; }
+  .diet-note-gf { background: #d4edba; color: #1a4a08; }
+  .diet-note-df { background: #d0e8f5; color: #0a3a5a; }
+  .grocery-section { margin-bottom: 1rem; }
+  .grocery-title { font-weight: 600; font-size: 0.88rem; color: var(--forest); padding: 0.4rem 0; border-bottom: 1px solid var(--border2); margin-bottom: 0.5rem; }
+  .grocery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 4px; }
+  .grocery-item { font-size: 0.8rem; color: var(--text2); padding: 4px 0; display: flex; gap: 8px; align-items: center; cursor: pointer; user-select: none; }
+  .grocery-item input[type=checkbox] { width: 15px; height: 15px; flex-shrink: 0; accent-color: var(--forest); cursor: pointer; }
+  .grocery-item.checked { text-decoration: line-through; opacity: 0.45; }
+  .activity-card { display: flex; gap: 12px; background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1rem; margin-bottom: 10px; align-items: flex-start; }
+  .activity-icon { font-size: 24px; color: var(--sage); min-width: 28px; }
+  .activity-name { font-weight: 600; font-size: 0.9rem; }
+  .activity-detail { font-size: 0.8rem; color: var(--text3); margin-top: 3px; line-height: 1.5; }
+  .activity-tags { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
+  .logistics-title { font-weight: 600; font-size: 0.9rem; color: var(--forest); margin-bottom: 0.5rem; }
+  .info-row { display: flex; gap: 8px; padding: 0.45rem 0; border-bottom: 1px solid var(--border); font-size: 0.83rem; align-items: flex-start; }
+  .info-row:last-child { border-bottom: none; }
+  .info-label { color: var(--text3); min-width: 120px; font-weight: 500; flex-shrink: 0; }
+  .info-val { color: var(--text); line-height: 1.5; }
+  .important-box { background: #fff8e8; border: 1px solid rgba(196,147,63,0.4); border-left: 4px solid #C4933F; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.82rem; color: var(--text); margin-bottom: 1rem; line-height: 1.6; }
+  .diet-box { background: #f0f7e8; border: 1px solid var(--mist); border-left: 4px solid var(--sage); border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.82rem; color: var(--text); margin-bottom: 1rem; line-height: 1.7; }
+  .packing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media(max-width:500px) { .packing-grid { grid-template-columns: 1fr; } }
+  .pack-group { background: white; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .pack-head { background: var(--sage); color: white; padding: 0.5rem 0.75rem; font-size: 0.82rem; font-weight: 500; }
+  .pack-items { padding: 0.5rem 0.75rem; }
+  .pack-item { font-size: 0.8rem; padding: 4px 0; color: var(--text2); display: flex; gap: 8px; align-items: center; cursor: pointer; user-select: none; }
+  .pack-item input[type=checkbox] { width: 15px; height: 15px; flex-shrink: 0; accent-color: var(--forest); cursor: pointer; }
+  .pack-item.checked { text-decoration: line-through; opacity: 0.45; }
+  .fireworks-highlight { background: #0f1a2e; border: 1px solid #2a3f6a; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .fireworks-row { display: flex; gap: 10px; padding: 0.45rem 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.83rem; align-items: flex-start; }
+  .fireworks-row:last-child { border-bottom: none; }
+  .fireworks-label { color: #8ab0d8; min-width: 90px; font-weight: 500; flex-shrink: 0; }
+  .fireworks-val { color: #e8f0ff; line-height: 1.5; }
+  @media(max-width:600px) {
+    .header h1 { font-size: 1.8rem; }
+    .dates-bar { gap: 0.75rem; font-size: 0.78rem; }
+    .meal-row { grid-template-columns: 75px 1fr; }
+    .meal-cook { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-badge">🌲 Family Reunion 2026</div>
+  <h1>Mountain Retreat</h1>
+  <p>Lake Tahoe &nbsp;·&nbsp; Four 2BR Villas &nbsp;·&nbsp; Four Pools &amp; Games</p>
+</div>
+
+<div class="dates-bar">
+  <span><i class="ti ti-calendar-event"></i> Check-in: Mon Jun 29 · 4:00 PM</span>
+  <span><i class="ti ti-calendar-check"></i> Checkout: Sun Jul 5 · 10:00 AM</span>
+  <span><i class="ti ti-users"></i> 11 Adults · 4 Kids · 2 Infants</span>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab active" onclick="showTab('crew')" role="tab"><i class="ti ti-users"></i> Crew</button>
+  <button class="tab" onclick="showTab('itinerary')" role="tab"><i class="ti ti-calendar"></i> Itinerary</button>
+  <button class="tab" onclick="showTab('logistics')" role="tab"><i class="ti ti-map-pin"></i> Logistics</button>
+  <button class="tab" onclick="showTab('costs')" role="tab"><i class="ti ti-coin"></i> Costs</button>
+  <button class="tab" onclick="showTab('meals')" role="tab"><i class="ti ti-tools-kitchen-2"></i> Meals</button>
+  <button class="tab" onclick="showTab('grocery')" role="tab"><i class="ti ti-shopping-cart"></i> Grocery</button>
+  <button class="tab" onclick="showTab('chores')" role="tab"><i class="ti ti-home-check"></i> Chores</button>
+  <button class="tab" onclick="showTab('activities')" role="tab"><i class="ti ti-run"></i> Activities</button>
+  <button class="tab" onclick="showTab('packing')" role="tab"><i class="ti ti-backpack"></i> Packing</button>
+</div>
+
+<div class="content">
+
+<!-- ═══ CREW ═══ -->
+<div id="tab-crew" class="panel active">
+  <div class="section-title"><i class="ti ti-users"></i> The full family roster</div>
+  <div class="important-box">
+    <strong>📍 HICV Club Vacations</strong> · Mountain Retreat: Four 2BR Villas + Pools &amp; Games<br>
+    Property phone: <strong>+1 775-588-3553</strong> &nbsp;·&nbsp; 11 registered adults + 4 children · Infants Howie &amp; Haz not on reservation.
+  </div>
+  <div class="diet-box">
+    <strong>Dietary needs — every cook please read:</strong><br>
+    <span class="diet-badge gf-badge" style="font-size:11px;padding:2px 8px;border-radius:10px">GF</span> <strong>Heady</strong> — gluten-free. No wheat, barley, rye, regular pasta, bread, or flour tortillas.<br>
+    <span class="diet-badge df-badge" style="font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px">DF</span> <strong>Rub (age 3)</strong> — dairy-free. No milk, butter, cheese, cream, alfredo, or sour cream.
+  </div>
+  <div class="family-grid">
+    <div class="family-card"><div class="avatar av-green">♛</div><div class="family-name">LouLou &amp; Gpa</div><div class="family-sub">Mom &amp; Dad · The Originals</div></div>
+    <div class="family-card"><div class="avatar av-sky">HE</div><div class="family-name">Heady &amp; "E"</div><div class="family-sub">Oli, age 7 · Rub, age 3</div><div class="diet-badge gf-badge">Heady: gluten-free</div><br><div class="diet-badge df-badge">Rub: dairy-free</div></div>
+    <div class="family-card"><div class="avatar av-gold">TM</div><div class="family-name">Tay &amp; Morg</div><div class="family-sub">Will, age 5 · Wren, age 4</div><div class="baby-badge">🤰 Morg is pregnant</div></div>
+    <div class="family-card"><div class="avatar av-rust">DB</div><div class="family-name">DanDan &amp; Brookie</div><div class="family-sub">Howie · 3 mo infant boy</div><div class="baby-badge">👶 Newborn</div></div>
+    <div class="family-card"><div class="avatar av-pink">HS</div><div class="family-name">HannaJane &amp; Stu</div><div class="family-sub">Haz · 4 mo infant girl</div><div class="baby-badge">👶 Newborn</div></div>
+    <div class="family-card"><div class="avatar av-purple">B</div><div class="family-name">Beaugurt</div><div class="family-sub">Youngest bro · Flying solo 😎</div></div>
+  </div>
+  <div style="margin-top:1.5rem">
+    <div class="section-title"><i class="ti ti-home"></i> Villa assignments (suggested)</div>
+    <div class="card card-green">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><strong style="font-size:0.85rem;color:var(--forest)">Villa 1 — The Grandparents</strong><p style="font-size:0.8rem;color:var(--text3);margin-top:4px">LouLou &amp; Gpa · Base camp!</p></div>
+        <div><strong style="font-size:0.85rem;color:var(--forest)">Villa 2 — The Big Kids</strong><p style="font-size:0.8rem;color:var(--text3);margin-top:4px">Heady, "E", Oli &amp; Rub<br>Tay, Morg, Will &amp; Wren</p></div>
+        <div><strong style="font-size:0.85rem;color:var(--forest)">Villa 3 — New Parents</strong><p style="font-size:0.8rem;color:var(--text3);margin-top:4px">DanDan, Brookie &amp; Howie<br>HannaJane, Stu &amp; Haz</p></div>
+        <div><strong style="font-size:0.85rem;color:var(--forest)">Villa 4 — The Free Agent</strong><p style="font-size:0.8rem;color:var(--text3);margin-top:4px">Beaugurt + overflow &amp; baby nap space</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ITINERARY ═══ -->
+<div id="tab-itinerary" class="panel">
+  <div class="section-title"><i class="ti ti-calendar"></i> Day-by-day itinerary</div>
+  <div class="important-box">🏔 Lake Tahoe, NV — Warm days (~80°F), cool nights (~50°F). <strong>4th of July Fireworks: Saturday July 4 · 9:45 PM · South Shore · KRLT 93.9 FM!</strong></div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 1 — Arrival</span><span class="day-date">Monday, June 29</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">All Day</span><i class="ti ti-car time-icon"></i><div class="time-content"><div class="title">Travel to Lake Tahoe</div><div class="detail">Each family travels on their own schedule</div><span class="tag tag-sky">Travel day</span></div></div>
+      <div class="time-block"><span class="time-tag">4:00 PM</span><i class="ti ti-key time-icon"></i><div class="time-content"><div class="title">Check-in opens · HICV Club Vacations</div><div class="detail">Call ahead: +1 775-588-3553 · Unpack &amp; settle into villas</div><span class="tag tag-green">Key milestone</span></div></div>
+      <div class="time-block"><span class="time-tag">6:00 PM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Welcome BBQ — Burgers &amp; Hot Dogs</div><div class="detail">Cook: Beaugurt + Heady · GF buns for Heady · DF-safe sides for Rub</div><span class="tag tag-gf">GF</span><span class="tag tag-df">DF</span></div></div>
+      <div class="time-block"><span class="time-tag">8:00 PM</span><i class="ti ti-sparkles time-icon"></i><div class="time-content"><div class="title">Welcome circle &amp; week overview</div><div class="detail">Share itinerary, chore chart &amp; dietary needs with everyone</div></div></div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 2 — Lake Day</span><span class="day-date">Tuesday, June 30</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">8:30 AM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Pancake Breakfast</div><div class="detail">Cook: LouLou &amp; Gpa · GF pancake mix separate for Heady · DF milk &amp; butter for Rub</div><span class="tag tag-gf">GF</span><span class="tag tag-df">DF</span></div></div>
+      <div class="time-block"><span class="time-tag">10:30 AM</span><i class="ti ti-beach time-icon"></i><div class="time-content"><div class="title">Sand Harbor or Kings Beach</div><div class="detail">Crystal clear water, sandy shore · Arrive early for parking · Pack sunscreen &amp; chairs</div><span class="tag tag-kids">All ages</span></div></div>
+      <div class="time-block"><span class="time-tag">1:00 PM</span><i class="ti ti-sandwich time-icon"></i><div class="time-content"><div class="title">Picnic lunch at the lake</div><div class="detail">GF bread for Heady · DF snacks packed for Rub</div></div></div>
+      <div class="time-block"><span class="time-tag">5:00 PM</span><i class="ti ti-pool time-icon"></i><div class="time-content"><div class="title">Villa Pool Time + Games</div><div class="detail">Use the resort pools and game facilities</div></div></div>
+      <div class="time-block"><span class="time-tag">7:00 PM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Pasta Night</div><div class="detail">Cook: Tay &amp; Morg · GF pasta for Heady · Marinara (no cream) separate for Rub</div><span class="tag tag-gf">GF pasta</span><span class="tag tag-df">DF marinara</span></div></div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 3 — Adventure Day</span><span class="day-date">Wednesday, July 1</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">8:30 AM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Eggs &amp; Breakfast Burritos</div><div class="detail">Cook: DanDan &amp; Beaugurt · GF corn tortillas for Heady · No cheese/sour cream for Rub</div><span class="tag tag-gf">GF corn tortillas</span><span class="tag tag-df">DF</span></div></div>
+      <div class="time-block"><span class="time-tag">10:00 AM</span><i class="ti ti-mountain time-icon"></i><div class="time-content"><div class="title">Hiking group vs. Pool/Villa group</div><div class="detail">Hikers: Tahoe Rim Trail · Pool crew with little ones &amp; infant families</div><span class="tag tag-sky">Optional split</span></div></div>
+      <div class="time-block"><span class="time-tag">2:00 PM</span><i class="ti ti-ship time-icon"></i><div class="time-content"><div class="title">Kayak / paddleboard rentals (optional)</div><div class="detail">~$25–40/hr per vessel · Multiple spots on north shore · Book ahead!</div><span class="tag tag-gold">Optional</span></div></div>
+      <div class="time-block"><span class="time-tag">6:30 PM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Taco Tuesday (on Wednesday!)</div><div class="detail">Cook: HannaJane &amp; Stu · GF corn tortillas for Heady · No cheese/sour cream for Rub</div><span class="tag tag-gf">GF</span><span class="tag tag-df">DF</span></div></div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 4 — Chill &amp; Explore</span><span class="day-date">Thursday, July 2</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">9:00 AM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">French Toast &amp; Bacon</div><div class="detail">Cook: Heady &amp; "E" · GF bread for Heady · Oat milk egg dip for Rub</div><span class="tag tag-gf">GF bread</span><span class="tag tag-df">DF</span></div></div>
+      <div class="time-block"><span class="time-tag">11:00 AM</span><i class="ti ti-walk time-icon"></i><div class="time-content"><div class="title">Tahoe City stroll — shops &amp; ice cream</div><div class="detail">Rub: DF sorbet · Heady: check for GF cones · Easy walk with strollers</div><span class="tag tag-kids">Stroller friendly</span></div></div>
+      <div class="time-block"><span class="time-tag">2:00 PM</span><i class="ti ti-device-gamepad time-icon"></i><div class="time-content"><div class="title">Resort games &amp; Family Olympics!</div><div class="detail">Ping pong, pool, lawn games · Beaugurt on announcer duty</div><span class="tag tag-kids">All ages</span></div></div>
+      <div class="time-block"><span class="time-tag">6:30 PM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Grilled Salmon, corn &amp; roasted potatoes</div><div class="detail">Cook: LouLou &amp; Gpa · Naturally GF &amp; DF — everyone safe for this one!</div><span class="tag tag-gf">Naturally GF</span><span class="tag tag-df">Naturally DF</span></div></div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 5 — 4th of July Eve</span><span class="day-date">Friday, July 3</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">9:00 AM</span><i class="ti ti-tools-kitchen-2 time-icon"></i><div class="time-content"><div class="title">Red, White &amp; Blueberry Pancakes</div><div class="detail">Cook: All hands! · GF mix for Heady · DF milk for Rub</div></div></div>
+      <div class="time-block"><span class="time-tag">11:00 AM</span><i class="ti ti-beach time-icon"></i><div class="time-content"><div class="title">Big Beach Day</div><div class="detail">Full family at the lake · 4th of July gear encouraged!</div><span class="tag tag-green">Holiday!</span></div></div>
+      <div class="time-block"><span class="time-tag">4:00 PM</span><i class="ti ti-flame time-icon"></i><div class="time-content"><div class="title">4th of July BBQ Cookout</div><div class="detail">Cook: Beaugurt leads grill · Ribs, corn, watermelon · All naturally GF · DF sides for Rub</div><span class="tag tag-gf">Naturally GF</span></div></div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header" style="background:#0f1a2e"><span class="day-label">Day 6 — 4th of July + Fireworks! 🎆</span><span class="day-date">Saturday, July 4</span></div>
+    <div class="day-body" style="background:#0f1a2e;border-color:#2a3f6a">
+      <div class="time-block" style="border-color:#2a3f6a"><span class="time-tag" style="color:#8ab0d8">9:00 AM</span><i class="ti ti-coffee" style="color:#4a7fa5;font-size:18px;min-width:20px"></i><div class="time-content"><div class="title" style="color:#e8f0ff">Bagels &amp; Leftovers Brunch</div><div class="detail" style="color:#8ab0d8">Cook: Tay &amp; Heady · GF bagels for Heady · DF cream cheese for Rub</div></div></div>
+      <div class="time-block" style="border-color:#2a3f6a"><span class="time-tag" style="color:#8ab0d8">11:00 AM</span><i class="ti ti-camera" style="color:#4a7fa5;font-size:18px;min-width:20px"></i><div class="time-content"><div class="title" style="color:#e8f0ff">Family Photo Session</div><div class="detail" style="color:#8ab0d8">Everyone dressed! Scenic overlook · Tripod + remote shutter · Consider a local photographer</div><span class="tag tag-green">Don't miss!</span></div></div>
+      <div class="time-block" style="border-color:#2a3f6a"><span class="time-tag" style="color:#8ab0d8">1:00 PM</span><i class="ti ti-pool" style="color:#4a7fa5;font-size:18px;min-width:20px"></i><div class="time-content"><div class="title" style="color:#e8f0ff">Final pool party + packing begins</div><div class="detail" style="color:#8ab0d8">Kids swim while adults start organizing</div></div></div>
+      <div class="time-block" style="border-color:#2a3f6a"><span class="time-tag" style="color:#8ab0d8">6:30 PM</span><i class="ti ti-pizza" style="color:#4a7fa5;font-size:18px;min-width:20px"></i><div class="time-content"><div class="title" style="color:#e8f0ff">Farewell Pizza Night</div><div class="detail" style="color:#8ab0d8">Order delivery · GF crust for Heady · Dairy-free / no cheese option for Rub</div></div></div>
+      <div class="time-block" style="border-color:#2a3f6a;background:rgba(42,63,106,0.5)">
+        <span class="time-tag" style="color:#f0c870;font-weight:600">9:45 PM</span>
+        <i class="ti ti-sparkles" style="color:#f0c870;font-size:18px;min-width:20px"></i>
+        <div class="time-content">
+          <div class="title" style="color:#fff5cc;font-size:1rem">🎆 4th of July Fireworks — CONFIRMED</div>
+          <div class="detail" style="color:#d4b870;margin-top:5px">Launched from barges · South Shore of Lake Tahoe</div>
+          <div class="detail" style="color:#d4b870">Show begins <strong style="color:#f0c870">9:45 PM</strong> · Estimated end <strong style="color:#f0c870">10:05 PM</strong> (~20 min)</div>
+          <div class="detail" style="color:#8ab0d8;margin-top:4px">Synchronized musical score: tune to <strong style="color:#a0c8e8">KRLT 93.9 FM</strong> or scan QR code at event · Bring blankets &amp; layers — it'll be cold after dark!</div>
+          <div style="margin-top:6px">
+            <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">Free</span>
+            <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">South Shore barges</span>
+            <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">KRLT 93.9 FM</span>
+            <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">Arrive early</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="itinerary-day">
+    <div class="day-header"><span class="day-label">Day 7 — Checkout</span><span class="day-date">Sunday, July 5</span></div>
+    <div class="day-body">
+      <div class="time-block"><span class="time-tag">7:00 AM</span><i class="ti ti-coffee time-icon"></i><div class="time-content"><div class="title">Coffee, pastries &amp; grab-and-go</div><div class="detail">GF pastry for Heady · Keep it light — departing soon</div></div></div>
+      <div class="time-block"><span class="time-tag">8:00 AM</span><i class="ti ti-home-check time-icon"></i><div class="time-content"><div class="title">All-hands final clean &amp; pack</div><div class="detail">Every family pitches in — see Chores tab for assignments</div><span class="tag tag-rust">Required</span></div></div>
+      <div class="time-block"><span class="time-tag">10:00 AM</span><i class="ti ti-door-exit time-icon"></i><div class="time-content"><div class="title">Checkout deadline</div><div class="detail">Keys returned · Safe travels everyone! 💚</div><span class="tag tag-green">Key milestone</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LOGISTICS ═══ -->
+<div id="tab-logistics" class="panel">
+  <div class="section-title"><i class="ti ti-map-pin"></i> Travel &amp; logistics</div>
+  <div class="card card-gold">
+    <div class="logistics-title">🏡 Property details</div>
+    <div class="info-row"><span class="info-label">Host</span><span class="info-val">HICV Club Vacations</span></div>
+    <div class="info-row"><span class="info-label">Phone</span><span class="info-val">+1 775-588-3553</span></div>
+    <div class="info-row"><span class="info-label">Property</span><span class="info-val">Mountain Retreat: Four 2BR Villas + Pools &amp; Games</span></div>
+    <div class="info-row"><span class="info-label">Check-in</span><span class="info-val">Monday, June 29 · 4:00 PM</span></div>
+    <div class="info-row"><span class="info-label">Checkout</span><span class="info-val">Sunday, July 5 · 10:00 AM</span></div>
+    <div class="info-row"><span class="info-label">Reservation</span><span class="info-val">11 adults, 4 children (2 infants not on reservation)</span></div>
+  </div>
+  <div class="card card-sky">
+    <div class="logistics-title">✈️ Getting there — each family coordinates own travel</div>
+    <div class="info-row"><span class="info-label">Airports</span><span class="info-val">Reno-Tahoe (RNO) ~45 min · Sacramento (SMF) ~2 hrs</span></div>
+    <div class="info-row"><span class="info-label">Drive from Yuma</span><span class="info-val">~10–11 hrs · I-15 N to US-395 N recommended</span></div>
+    <div class="info-row"><span class="info-label">Car seats needed</span><span class="info-val">Oli (7), Rub (3), Will (5), Wren (4), Howie (3mo), Haz (4mo)</span></div>
+    <div class="info-row"><span class="info-label">Grocery stop</span><span class="info-val">Safeway or Raley's in South Lake Tahoe on the way in</span></div>
+  </div>
+  <div class="card">
+    <div class="logistics-title">👶 Infant &amp; pregnancy notes</div>
+    <div class="info-row"><span class="info-label">Morg (pregnant)</span><span class="info-val">Aisle seats · Pregnancy-safe activities only · No undercooked food · Bring pillow support</span></div>
+    <div class="info-row"><span class="info-label">Howie (3mo)</span><span class="info-val">Pack pack-n-play, sound machine, blackout curtains, feeding supplies</span></div>
+    <div class="info-row"><span class="info-label">Haz (4mo)</span><span class="info-val">Same as above — coordinate with HannaJane &amp; Stu on needs</span></div>
+    <div class="info-row"><span class="info-label">Altitude</span><span class="info-val">Lake Tahoe is ~6,200 ft · Infants &amp; pregnant women may feel effects · Stay hydrated!</span></div>
+    <div class="info-row"><span class="info-label">Nearest hospital</span><span class="info-val">Barton Memorial Hospital, South Lake Tahoe · (530) 541-3420</span></div>
+  </div>
+  <div class="card card-green">
+    <div class="logistics-title">📋 Before you leave home</div>
+    <div class="info-row"><span class="info-label">Group chat</span><span class="info-val">Set up family group text or WhatsApp for the week</span></div>
+    <div class="info-row"><span class="info-label">Arrival times</span><span class="info-val">Each family confirms ETA in group chat</span></div>
+    <div class="info-row"><span class="info-label">Baby gear</span><span class="info-val">DanDan/Brookie &amp; HannaJane/Stu confirm pack-n-plays &amp; monitors</span></div>
+    <div class="info-row"><span class="info-label">Kayak rentals</span><span class="info-val">Book in advance if desired — Jul 4th weekend fills fast</span></div>
+    <div class="info-row"><span class="info-label">GF/DF supplies</span><span class="info-val">Heady &amp; "E" confirm any specialty items to add to grocery list</span></div>
+  </div>
+</div>
+
+<!-- ═══ COSTS ═══ -->
+<div id="tab-costs" class="panel">
+  <div class="section-title"><i class="ti ti-coin"></i> Costs</div>
+  <div class="dads-tab-banner">
+    <i class="ti ti-heart dads-tab-icon" aria-hidden="true"></i>
+    <div class="dads-tab-text">
+      <strong>All on Dad's tab — thanks, Gpa! 💚</strong>
+      <span>LouLou &amp; Gpa are covering all shared trip costs. Your only expense is getting yourself to and from Lake Tahoe.</span>
+    </div>
+  </div>
+  <div class="card">
+    <table class="cost-table">
+      <thead><tr><th style="width:35%">Category</th><th style="width:30%">Estimated total</th><th style="width:35%">Notes</th></tr></thead>
+      <tbody>
+        <tr><td>🏡 Airbnb / HICV Villas</td><td>On Dad's tab</td><td>LouLou's reservation</td></tr>
+        <tr><td>🛒 Shared groceries</td><td>~$900 · Dad's tab</td><td>All meals, 6 nights, GF &amp; DF items included</td></tr>
+        <tr><td>⛽ Gas / flights / travel</td><td>Each family's own</td><td>Getting to/from Tahoe</td></tr>
+        <tr><td>🚣 Kayak &amp; boat rentals</td><td>~$300 · Dad's tab</td><td>Optional — participants only</td></tr>
+        <tr><td>🎆 4th of July extras</td><td>~$100 · Dad's tab</td><td>Fireworks night supplies, decor</td></tr>
+        <tr><td>🍦 Ice cream / misc</td><td>~$150 · Dad's tab</td><td>Tahoe City outings &amp; treats</td></tr>
+        <tr><td><strong>Total (excl. travel)</strong></td><td><strong>~$1,450+</strong></td><td>Thank you Mom &amp; Dad!</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card card-green">
+    <div class="logistics-title">💚 How to say thank you</div>
+    <div class="info-row"><span class="info-label">Best gift</span><span class="info-val">Show up, be present, help cook and clean, and make memories together</span></div>
+    <div class="info-row"><span class="info-label">Your only expense</span><span class="info-val">Getting yourself there and back — everything else is covered</span></div>
+  </div>
+</div>
+
+<!-- ═══ MEALS ═══ -->
+<div id="tab-meals" class="panel">
+  <div class="section-title"><i class="ti ti-tools-kitchen-2"></i> Meal plan</div>
+  <div class="diet-box">
+    <span class="diet-badge gf-badge" style="font-size:11px;padding:2px 8px;border-radius:10px">GF</span> <strong>Heady is gluten-free</strong> — always prepare a separate GF portion for meals with bread, pasta, tortillas, or batter.<br>
+    <span class="diet-badge df-badge" style="font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block;margin-top:4px">DF</span> <strong>Rub (age 3) is dairy-free</strong> — no butter, milk, cheese, cream, alfredo, or sour cream in Rub's portions.<br>
+    <span style="font-size:0.8rem;color:var(--text3)">Morg (pregnant) — well-done meat and fish only, no undercooked food.</span>
+  </div>
+
+  <div class="meal-day">
+    <div class="meal-head">Monday Jun 29 — Arrival Day</div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">Welcome BBQ — Burgers &amp; Hot Dogs<div class="diet-note diet-note-gf">GF buns for Heady</div><div class="diet-note diet-note-df">Skip cheese for Rub · naturally DF</div></span><span class="meal-cook">Beaugurt + Heady</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Tuesday Jun 30</div>
+    <div class="meal-row"><span class="meal-type">Breakfast</span><span class="meal-name">Pancakes, syrup, fruit<div class="diet-note diet-note-gf">GF pancake mix separate for Heady</div><div class="diet-note diet-note-df">DF milk + butter for Rub's portion</div></span><span class="meal-cook">LouLou &amp; Gpa</span></div>
+    <div class="meal-row"><span class="meal-type">Lunch</span><span class="meal-name">Picnic — sandwiches, chips, fruit<div class="diet-note diet-note-gf">GF bread for Heady</div></span><span class="meal-cook">Packed by all</span></div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">Pasta Bar — marinara, alfredo, salad, garlic bread<div class="diet-note diet-note-gf">GF pasta + GF bread for Heady</div><div class="diet-note diet-note-df">Marinara (no cream) + DF butter on bread for Rub</div></span><span class="meal-cook">Tay &amp; Morg</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Wednesday Jul 1</div>
+    <div class="meal-row"><span class="meal-type">Breakfast</span><span class="meal-name">Eggs &amp; Breakfast Burritos<div class="diet-note diet-note-gf">GF corn tortillas for Heady</div><div class="diet-note diet-note-df">No cheese / sour cream for Rub</div></span><span class="meal-cook">DanDan &amp; Beaugurt</span></div>
+    <div class="meal-row"><span class="meal-type">Lunch</span><span class="meal-name">On your own while adventuring</span><span class="meal-cook">Individual</span></div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">Taco Bar — beef, chicken, all fixings<div class="diet-note diet-note-gf">GF corn tortillas for Heady</div><div class="diet-note diet-note-df">Skip cheese &amp; sour cream for Rub</div></span><span class="meal-cook">HannaJane &amp; Stu</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Thursday Jul 2</div>
+    <div class="meal-row"><span class="meal-type">Breakfast</span><span class="meal-name">French Toast &amp; Bacon<div class="diet-note diet-note-gf">GF bread for Heady's french toast</div><div class="diet-note diet-note-df">Oat milk egg dip for Rub</div></span><span class="meal-cook">Heady &amp; "E"</span></div>
+    <div class="meal-row"><span class="meal-type">Lunch</span><span class="meal-name">Leftovers / on own in Tahoe City</span><span class="meal-cook">Individual</span></div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">Grilled Salmon, corn, roasted potatoes, salad<div class="diet-note diet-note-gf" style="background:#d4edba;color:#1a4a08">Naturally GF — everyone safe!</div><div class="diet-note diet-note-df" style="background:#d0e8f5;color:#0a3a5a">Naturally DF — everyone safe!</div></span><span class="meal-cook">LouLou &amp; Gpa</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Friday Jul 3</div>
+    <div class="meal-row"><span class="meal-type">Breakfast</span><span class="meal-name">Red, White &amp; Blueberry Pancakes<div class="diet-note diet-note-gf">GF mix for Heady</div><div class="diet-note diet-note-df">DF milk for Rub</div></span><span class="meal-cook">All hands!</span></div>
+    <div class="meal-row"><span class="meal-type">Lunch</span><span class="meal-name">Snacks &amp; sandwiches at the beach<div class="diet-note diet-note-gf">GF bread for Heady</div></span><span class="meal-cook">Packed</span></div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">4th of July BBQ — ribs, corn, watermelon, potato salad<div class="diet-note diet-note-gf">Naturally GF</div><div class="diet-note diet-note-df">DF potato salad for Rub</div></span><span class="meal-cook">Beaugurt leads grill</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Saturday Jul 4 — Fireworks Night! 🎆</div>
+    <div class="meal-row"><span class="meal-type">Brunch</span><span class="meal-name">Leftovers + Bagels<div class="diet-note diet-note-gf">GF bagels for Heady</div><div class="diet-note diet-note-df">DF cream cheese for Rub</div></span><span class="meal-cook">Tay &amp; Heady</span></div>
+    <div class="meal-row"><span class="meal-type">Dinner</span><span class="meal-name">Pizza delivery<div class="diet-note diet-note-gf">Order GF crust for Heady</div><div class="diet-note diet-note-df">Dairy-free / no cheese for Rub</div></span><span class="meal-cook">Order out</span></div>
+    <div class="meal-row"><span class="meal-type">9:45 PM</span><span class="meal-name" style="color:var(--forest);font-weight:600">Fireworks! South Shore · KRLT 93.9 FM · Bring blankets!</span><span class="meal-cook">Everyone!</span></div>
+  </div>
+  <div class="meal-day">
+    <div class="meal-head">Sunday Jul 5 — Departure</div>
+    <div class="meal-row"><span class="meal-type">Breakfast</span><span class="meal-name">Coffee, pastries, grab-and-go<div class="diet-note diet-note-gf">GF pastry for Heady</div></span><span class="meal-cook">Self-serve</span></div>
+  </div>
+</div>
+
+<!-- ═══ GROCERY ═══ -->
+<div id="tab-grocery" class="panel">
+  <div class="section-title"><i class="ti ti-shopping-cart"></i> Master grocery list</div>
+  <div class="important-box">🛒 Safeway or Raley's in South Lake Tahoe · Budget ~$900 total · <strong>On Dad's tab!</strong> · Check boxes as you shop.</div>
+
+  <div class="grocery-section">
+    <div class="grocery-title">🥩 Proteins</div>
+    <div class="grocery-grid" id="g-proteins"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title" style="color:#1a4a08">🌾 GF Alternatives — for Heady</div>
+    <div class="grocery-grid" id="g-gf"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title" style="color:#0a3a5a">🥛 DF Alternatives — for Rub</div>
+    <div class="grocery-grid" id="g-df"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title">🥛 Regular dairy</div>
+    <div class="grocery-grid" id="g-dairy"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title">🥦 Produce</div>
+    <div class="grocery-grid" id="g-produce"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title">🍝 Pantry &amp; dry goods</div>
+    <div class="grocery-grid" id="g-pantry"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title">🍫 Snacks &amp; treats</div>
+    <div class="grocery-grid" id="g-snacks"></div>
+  </div>
+  <div class="grocery-section">
+    <div class="grocery-title">🧴 Non-food essentials</div>
+    <div class="grocery-grid" id="g-nonfood"></div>
+  </div>
+</div>
+
+<!-- ═══ CHORES ═══ -->
+<div id="tab-chores" class="panel">
+  <div class="section-title"><i class="ti ti-home-check"></i> Cooking &amp; cleaning assignments</div>
+  <div class="important-box"><strong>House rules:</strong> Whoever cooks does NOT clean that meal. Infant families get lighter loads. Beaugurt pulls extra grill duty — compensated with extra pool time!</div>
+  <div class="section-title" style="margin-top:1.5rem;font-size:1rem"><i class="ti ti-tools-kitchen-2"></i> Cooking rotation</div>
+  <div class="assign-grid">
+    <div class="assign-day"><div class="assign-head">Mon Jun 29 — Welcome BBQ</div><div class="assign-row"><span class="assign-who">Beaugurt + Heady</span><span class="assign-task">Grill dinner</span></div><div class="assign-row"><span class="assign-who">Tay &amp; "E"</span><span class="assign-task">Setup &amp; cleanup</span></div></div>
+    <div class="assign-day"><div class="assign-head">Tue Jun 30</div><div class="assign-row"><span class="assign-who">LouLou &amp; Gpa</span><span class="assign-task">Breakfast</span></div><div class="assign-row"><span class="assign-who">Tay &amp; Morg</span><span class="assign-task">Dinner (pasta)</span></div><div class="assign-row"><span class="assign-who">Heady &amp; "E"</span><span class="assign-task">Pack picnic lunch</span></div></div>
+    <div class="assign-day"><div class="assign-head">Wed Jul 1</div><div class="assign-row"><span class="assign-who">DanDan &amp; Beaugurt</span><span class="assign-task">Breakfast burritos</span></div><div class="assign-row"><span class="assign-who">HannaJane &amp; Stu</span><span class="assign-task">Dinner (taco bar)</span></div></div>
+    <div class="assign-day"><div class="assign-head">Thu Jul 2</div><div class="assign-row"><span class="assign-who">Heady &amp; "E"</span><span class="assign-task">Breakfast (french toast)</span></div><div class="assign-row"><span class="assign-who">LouLou &amp; Gpa</span><span class="assign-task">Dinner (salmon)</span></div></div>
+    <div class="assign-day"><div class="assign-head">Fri Jul 3 — 4th of July!</div><div class="assign-row"><span class="assign-who">All hands</span><span class="assign-task">Patriotic breakfast</span></div><div class="assign-row"><span class="assign-who">Beaugurt</span><span class="assign-task">Lead the grill</span></div><div class="assign-row"><span class="assign-who">Tay + DanDan</span><span class="assign-task">Sides &amp; setup</span></div></div>
+    <div class="assign-day"><div class="assign-head">Sat Jul 4 — Fireworks Night</div><div class="assign-row"><span class="assign-who">Tay &amp; Heady</span><span class="assign-task">Brunch</span></div><div class="assign-row"><span class="assign-who">Pizza delivery</span><span class="assign-task">Farewell dinner</span></div></div>
+  </div>
+  <div class="section-title" style="margin-top:1.5rem;font-size:1rem"><i class="ti ti-home-check"></i> Daily cleaning duties</div>
+  <div class="assign-grid">
+    <div class="assign-day"><div class="assign-head">Kitchen cleanup (rotating)</div><div class="assign-row"><span class="assign-who">Mon</span><span class="assign-task">Tay &amp; "E"</span></div><div class="assign-row"><span class="assign-who">Tue</span><span class="assign-task">Beaugurt + Heady</span></div><div class="assign-row"><span class="assign-who">Wed</span><span class="assign-task">LouLou &amp; Gpa</span></div><div class="assign-row"><span class="assign-who">Thu</span><span class="assign-task">Tay &amp; Morg</span></div><div class="assign-row"><span class="assign-who">Fri</span><span class="assign-task">Heady &amp; Beaugurt</span></div><div class="assign-row"><span class="assign-who">Sat</span><span class="assign-task">LouLou &amp; Gpa</span></div></div>
+    <div class="assign-day"><div class="assign-head">General tidying (rotating)</div><div class="assign-row"><span class="assign-who">Mon</span><span class="assign-task">HannaJane &amp; Stu</span></div><div class="assign-row"><span class="assign-who">Tue</span><span class="assign-task">DanDan &amp; Brookie</span></div><div class="assign-row"><span class="assign-who">Wed</span><span class="assign-task">Beaugurt</span></div><div class="assign-row"><span class="assign-who">Thu</span><span class="assign-task">Heady &amp; "E"</span></div><div class="assign-row"><span class="assign-who">Fri</span><span class="assign-task">Tay &amp; Morg</span></div><div class="assign-row"><span class="assign-who">Sat</span><span class="assign-task">All together</span></div></div>
+  </div>
+  <div class="card card-gold" style="margin-top:1rem">
+    <div class="logistics-title">🧹 Checkout day cleaning — July 5 (all hands!)</div>
+    <div class="info-row"><span class="info-label">LouLou &amp; Gpa</span><span class="info-val">Oversee, sweep/mop common areas</span></div>
+    <div class="info-row"><span class="info-label">Heady &amp; "E"</span><span class="info-val">Strip beds Villa 2, bag linens</span></div>
+    <div class="info-row"><span class="info-label">Tay &amp; Morg</span><span class="info-val">Kitchen deep clean, trash out</span></div>
+    <div class="info-row"><span class="info-label">DanDan &amp; Brookie</span><span class="info-val">Pack up Villa 3 &amp; baby gear</span></div>
+    <div class="info-row"><span class="info-label">HannaJane &amp; Stu</span><span class="info-val">Bathrooms wipe down</span></div>
+    <div class="info-row"><span class="info-label">Beaugurt</span><span class="info-val">Final walkthrough, lost &amp; found sweep</span></div>
+  </div>
+</div>
+
+<!-- ═══ ACTIVITIES ═══ -->
+<div id="tab-activities" class="panel">
+  <div class="section-title"><i class="ti ti-run"></i> Activities &amp; adventures</div>
+
+  <div class="activity-card" style="background:#0f1a2e;border-color:#2a3f6a">
+    <i class="ti ti-sparkles activity-icon" style="color:#f0c870"></i>
+    <div>
+      <div class="activity-name" style="color:#fff5cc">4th of July Fireworks — CONFIRMED 🎆</div>
+      <div class="activity-detail" style="color:#8ab0d8">Launched from barges · South Shore of Lake Tahoe · Saturday, July 4</div>
+      <div class="activity-detail" style="color:#d4b870;margin-top:4px">Show begins <strong style="color:#f0c870">9:45 PM</strong> · Ends ~<strong style="color:#f0c870">10:05 PM</strong> · ~20 min show</div>
+      <div class="activity-detail" style="color:#8ab0d8;margin-top:4px">Synchronized soundtrack: <strong style="color:#a0c8e8">KRLT 93.9 FM</strong> or QR code at event · Bring blankets &amp; layers — cold after dark!</div>
+      <div class="activity-tags">
+        <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">Free</span>
+        <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">South Shore barges</span>
+        <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">KRLT 93.9 FM</span>
+        <span class="tag" style="background:rgba(240,200,112,0.2);color:#f0c870">Arrive early!</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-card"><i class="ti ti-beach activity-icon"></i><div><div class="activity-name">Lake Tahoe beaches</div><div class="activity-detail">Sand Harbor, Kings Beach, or Zephyr Cove · Arrive early for holiday weekend parking!</div><div class="activity-tags"><span class="tag tag-green">Free</span><span class="tag tag-kids">All ages</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-pool activity-icon"></i><div><div class="activity-name">Resort pools &amp; games</div><div class="activity-detail">HICV has multiple pools and game facilities · Perfect for infants' families &amp; Morg · Right at the villas</div><div class="activity-tags"><span class="tag tag-green">Included</span><span class="tag tag-kids">All ages</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-mountain activity-icon"></i><div><div class="activity-name">Tahoe Rim Trail hike</div><div class="activity-detail">Marlette Lake &amp; Spooner Lake are beautiful moderate hikes · Leave little ones at pool with willing adults</div><div class="activity-tags"><span class="tag tag-gold">Adults</span><span class="tag tag-sky">Wed morning</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-ship activity-icon"></i><div><div class="activity-name">Kayaks, paddleboards &amp; boat rentals</div><div class="activity-detail">~$25–40/hr · Multiple spots on north shore · Book in advance — July 4th weekend fills up fast! Not for Morg.</div><div class="activity-tags"><span class="tag tag-gold">~$25–40/hr · Dad's tab</span><span class="tag tag-sky">Book ahead!</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-device-gamepad activity-icon"></i><div><div class="activity-name">Family Olympics at the villas</div><div class="activity-detail">Ping pong, lawn games, swim races · Beaugurt on announcer duty · All ages welcome</div><div class="activity-tags"><span class="tag tag-green">Free</span><span class="tag tag-kids">All ages</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-camera activity-icon"></i><div><div class="activity-name">Family photo session</div><div class="activity-detail">Saturday morning · Scenic overlook · Coordinate outfits! · Consider a local photographer (~$150–200) · Tripod as backup</div><div class="activity-tags"><span class="tag tag-gold">Sat Jul 4 morning</span><span class="tag tag-green">Priceless memory</span></div></div></div>
+  <div class="activity-card"><i class="ti ti-walk activity-icon"></i><div><div class="activity-name">Tahoe City stroll</div><div class="activity-detail">Shops, galleries, ice cream · Stroller-friendly · DF sorbet for Rub · GF cones for Heady</div><div class="activity-tags"><span class="tag tag-kids">Stroller friendly</span><span class="tag tag-sky">Thu afternoon</span></div></div></div>
+</div>
+
+<!-- ═══ PACKING ═══ -->
+<div id="tab-packing" class="panel">
+  <div class="section-title"><i class="ti ti-backpack"></i> Packing guide</div>
+  <div class="important-box">🏔 Tahoe is at 6,200 ft — warm days, cold nights. <strong>Bring warm layers for fireworks night!</strong> Check items off as you pack.</div>
+  <div class="packing-grid" id="packing-grid"></div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const groceryData = {
+  'g-proteins': ['Ground beef (5 lbs)','Hot dogs (3 packs)','Baby back ribs (2 racks)','Salmon fillets (4 lbs)','Chicken breast (3 lbs)','Bacon (3 packs)','Eggs (4 dozen)','Shredded cheese','Deli meat (assorted)'],
+  'g-gf': ['GF burger buns','GF bread (sliced loaf)','GF bagels','GF pasta (2 boxes)','GF pancake mix (2 boxes)','GF corn tortillas','GF hot dog buns','GF pastries / muffins','GF granola bars / snacks'],
+  'g-df': ['Oat milk or almond milk (½ gal)','DF butter (Earth Balance)','DF cream cheese','Dairy-free sorbet for Rub'],
+  'g-dairy': ['Butter (2 lbs)','Milk (2 gallons)','Heavy cream','Sour cream','Cream cheese (2 blocks)','Parmesan (block)','Mozzarella (shredded)','Yogurt cups (kids)','OJ (2 cartons)'],
+  'g-produce': ['Corn on cob (12)','Watermelon (1 large)','Strawberries (2 lbs)','Blueberries (2 pints)','Bananas (2 bunches)','Apples (bag)','Grapes (2 lbs)','Baby carrots','Cherry tomatoes','Romaine (2 heads)','Potatoes (5 lbs)','Avocados (6)','Limes (bag)','Lemons (bag)','Garlic (2 heads)','Onions (3)','Bell peppers (4)','Jalapeños'],
+  'g-pantry': ['Regular pasta (4 boxes)','Marinara sauce (3 jars)','Alfredo sauce (2 jars)','Regular pancake mix (2 boxes)','Syrup (2 bottles)','Regular bread (2 loaves)','Regular bagels (2 packs)','Flour tortillas','Corn taco shells','Chips (3 bags)','Salsa (2 jars)','Peanut butter &amp; jelly','Cereal (2 boxes)','Olive oil','BBQ sauce (2 bottles)','Hot sauce','Rice (5 lb bag)'],
+  'g-snacks': ['Goldfish crackers','Granola bars (check GF label)','Microwave popcorn','S\'mores kit','Ice cream bars','Lemonade mix','Juice boxes (kids)','Sparkling water'],
+  'g-nonfood': ['Paper plates (100 ct)','Paper towels (6 rolls)','Trash bags (large)','Dish soap','Ziploc bags (all sizes)','Aluminum foil','Plastic wrap','Charcoal + lighter fluid','Sunscreen (extra)','Bug spray']
+};
+
+const packingData = [
+  { head: '☀️ Beach & outdoors', items: ['Sunscreen SPF 50+','Beach towels (per person)','Swimsuits (2 each)','Swim diapers (babies)','Beach chairs / camp chairs','Umbrella or shade tent','Cooler & ice packs','Water shoes / sandals','Life jackets (kids)','Bug spray','Sunglasses & hats'] },
+  { head: '👶 Baby & infant must-haves', items: ['Pack-n-play / travel crib','Sound machine','Blackout curtains (clip-on)','Baby monitor','Formula / feeding supplies','Baby carrier / wrap','Stroller','Diapers (extra supply!)','Wipes (3+ packs)','Baby sunscreen SPF 50'] },
+  { head: '🩺 Health & safety', items: ['First aid kit','Children\'s Tylenol & Motrin','Benadryl (kids & adult)','Prescription medications','Prenatal vitamins (Morg)','Thermometer','Altitude sickness remedy','Hydration tablets','Hand sanitizer'] },
+  { head: '🌾 GF / DF pantry backup', items: ['GF snack bars for Heady','GF crackers','DF snacks for Rub','Favorite GF condiments','DF butter (travel size)','GF soy sauce if needed'] },
+  { head: '🎒 Clothing & general', items: ['Light layers / hoodies','Warm jacket (fireworks night!)','Hiking shoes / sneakers','Flip flops for pool','Rain jacket (just in case)','4th of July outfit 🇺🇸','Family photo outfit (Sat)','Pajamas for kids','Blankets for fireworks'] },
+  { head: '🎮 Entertainment & extras', items: ['Card games & board games','Sidewalk chalk + bubbles','Pool toys & floaties','Downloaded movies / shows','Portable speaker','Camera + extra batteries','Tripod for family photos','Car radio ready for KRLT 93.9 FM'] }
+];
+
+function makeCheckItems(containerEl, items, prefix) {
+  items.forEach((item, i) => {
+    const key = prefix + '_' + i;
+    const checked = localStorage.getItem(key) === '1';
+    const label = document.createElement('label');
+    label.className = 'grocery-item' + (checked ? ' checked' : '');
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.checked = checked;
+    cb.addEventListener('change', function() {
+      localStorage.setItem(key, this.checked ? '1' : '0');
+      label.classList.toggle('checked', this.checked);
+    });
+    label.appendChild(cb);
+    const span = document.createElement('span');
+    span.innerHTML = item;
+    label.appendChild(span);
+    containerEl.appendChild(label);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  Object.entries(groceryData).forEach(([id, items]) => {
+    const el = document.getElementById(id);
+    if (el) makeCheckItems(el, items, id);
+  });
+
+  const pg = document.getElementById('packing-grid');
+  if (pg) {
+    packingData.forEach((group, gi) => {
+      const div = document.createElement('div');
+      div.className = 'pack-group';
+      const head = document.createElement('div');
+      head.className = 'pack-head';
+      head.textContent = group.head;
+      div.appendChild(head);
+      const items = document.createElement('div');
+      items.className = 'pack-items';
+      group.items.forEach((item, i) => {
+        const key = 'pack_' + gi + '_' + i;
+        const checked = localStorage.getItem(key) === '1';
+        const label = document.createElement('label');
+        label.className = 'pack-item' + (checked ? ' checked' : '');
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = checked;
+        cb.addEventListener('change', function() {
+          localStorage.setItem(key, this.checked ? '1' : '0');
+          label.classList.toggle('checked', this.checked);
+        });
+        label.appendChild(cb);
+        const span = document.createElement('span');
+        span.textContent = item;
+        label.appendChild(span);
+        items.appendChild(label);
+      });
+      div.appendChild(items);
+      pg.appendChild(div);
+    });
+  }
+});
+</script>
+</body>
+</html>
